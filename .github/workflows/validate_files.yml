@@ -1,0 +1,27 @@
+name: Deploy validate_files Environment
+
+on:
+  push:
+    branches:
+      - validate_files  # Ce workflow s'exécute uniquement pour la branche uat
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        
+        - name: Check index file presence
+          run: | 
+            if [ ! -f index.html ]; then 
+                echo "Error: index.html is missing!" 
+                exit 1 
+            fi
+        - name: Deploy to GitHub Pages (validate_files)
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           publish_dir: ./  # Dossier source, racine du dépôt
+           destination_dir: validate_files  # Déploie les fichiers dans le dossier /uat dans gh-pages
