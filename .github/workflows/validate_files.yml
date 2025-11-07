@@ -15,7 +15,7 @@ jobs:
         
         - name: Run Python script
           run: |
-           ../testScript.py  # Exécute ton script Python
+           testScript.py  # Exécute ton script Python
 
         - name: Deploy to GitHub Pages (validate_files)
           uses: peaceiris/actions-gh-pages@v3
